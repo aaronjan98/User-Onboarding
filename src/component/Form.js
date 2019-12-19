@@ -69,4 +69,33 @@ const Onboard = ({ values, errors, touched, status }) => {
     );
 };
 
-export default Onboard;
+const FormikForm = withFormik({
+    mapPropsToValues({ name, email, terms, password }) {
+      return {
+        name: "",
+        email: "",
+        password: password,
+        terms: terms || false,
+        notes: ""
+      };
+    },
+    validationSchema: Yup.object().shape({
+      name: Yup.string().required("Is Required"),
+      email: Yup.string().required("Is Required"),
+      password: Yup.string().required("Is Required"),
+      terms: Yup.boolean().oneOf([true], "Must indicate if vaccinated")
+    }),
+    handleSubmit(values, { setStatus, resetForm }) {
+      console.log("submitting", values);
+      axios
+        .post("https://reqres.in/api/users/", values)
+        .then(res => {
+          console.log("success", res);
+          setStatus(res.data);
+          resetForm();
+        })
+        .catch(err => console.log(err.response));
+    }
+  })(AnimalForm);
+  // replaced AnimalForm with FormikForm
+  export default FormikForm;
