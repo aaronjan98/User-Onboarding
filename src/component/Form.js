@@ -28,15 +28,15 @@ const Onboard = ({ values, errors, touched, status }) => {
                 )}
 
                 <label htmlFor="email">Email:</label>
-                <Field id="email" type="text" email="email" />
+                <Field id="email" type="text" name="email" />
                 {touched.email && errors.email && (
-                    <p classemail="errors">{errors.email}</p>
+                    <p className="errors">{errors.email}</p>
                 )}
 
                 <label htmlFor="password">Password:</label>
-                <Field id="password" type="text" password="password" />
+                <Field id="password" type="text" name="password" />
                 {touched.password && errors.password && (
-                    <p classpassword="errors">{errors.password}</p>
+                    <p className="errors">{errors.password}</p>
                 )}
 
                 <label htmlFor="terms" className="checkbox-container">
@@ -59,9 +59,9 @@ const Onboard = ({ values, errors, touched, status }) => {
 
             {user.map(userInfo => (
                 <ul key={userInfo.id}>
-                <li>Name: {userInfo.name}</li>
-                <li>Email: {userInfo.email}</li>
-                <li>Password: {userInfo.password}</li>
+                <h1>{userInfo.name}</h1>
+                <p>Email: {userInfo.email}</p>
+                <p>Password: {userInfo.password}</p>
                 </ul>
             ))}
 
@@ -83,7 +83,7 @@ const FormikForm = withFormik({
       name: Yup.string().required("Is Required"),
       email: Yup.string().required("Is Required"),
       password: Yup.string().required("Is Required"),
-      terms: Yup.boolean().oneOf([true], "Must indicate if vaccinated")
+      terms: Yup.boolean().oneOf([true], "Must approved terms of service")
     }),
     handleSubmit(values, { setStatus, resetForm }) {
       console.log("submitting", values);
@@ -96,6 +96,6 @@ const FormikForm = withFormik({
         })
         .catch(err => console.log(err.response));
     }
-  })(AnimalForm);
-  // replaced AnimalForm with FormikForm
+  })(Onboard);
+
   export default FormikForm;
