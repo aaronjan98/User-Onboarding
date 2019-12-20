@@ -23,34 +23,46 @@ const Onboard = ({ values, errors, touched, status }) => {
             <Form>
                 <label htmlFor="name">Name:</label>
                 <Field id="name" type="text" name="name" />
-                {touched.name && errors.name && (
-                    <p className="errors">{errors.name}</p>
-                )}
+                <div >
+                    <p className="error"> &nbsp;
+                        {touched.name && errors.name && (
+                            errors.name
+                        )}
+                    </p>
+                </div>
 
                 <label htmlFor="email">Email:</label>
                 <Field id="email" type="text" name="email" />
-                {touched.email && errors.email && (
-                    <p className="errors">{errors.email}</p>
-                )}
+                <div>
+                    <p> &nbsp;
+                        {touched.email && errors.email && (
+                            errors.email
+                        )}
+                    </p>
+                </div>
 
                 <label htmlFor="password">Password:</label>
                 <Field id="password" type="text" name="password" />
-                {touched.password && errors.password && (
-                    <p className="errors">{errors.password}</p>
-                )}
+                <div>
+                    <p> &nbsp;
+                        {touched.password && errors.password && (
+                            errors.password
+                        )}
+                    </p>
+                </div>
 
                 <label htmlFor="terms" className="checkbox-container">
-                Terms of Service
-                <Field
-                    id="terms"
-                    type="checkbox"
-                    name="terms"
-                    checked={values.terms}
-                />
-                {touched.terms && errors.terms && (
-                    <p className="errors">{errors.terms}</p>
-                )}
-                <span className="checkmark" />
+                    Terms of Service
+                    <Field
+                        id="terms"
+                        type="checkbox"
+                        name="terms"
+                        checked={values.terms}
+                    />
+                    {touched.terms && errors.terms && (
+                        <p className="errors">{errors.terms}</p>
+                    )}
+                    <span className="checkmark" />
                 </label>
 
                 <button type="submit">Submit!</button>
@@ -74,8 +86,8 @@ const FormikForm = withFormik({
       return {
         name: "",
         email: "",
-        password: password,
-        terms: terms || false,
+        password: "",
+        terms: false,
         notes: ""
       };
     },
